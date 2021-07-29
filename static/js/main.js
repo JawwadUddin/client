@@ -65,6 +65,7 @@ form.addEventListener("submit", async (e) => {
     options
   );
 
+  
   const tokenData = await response.json();
 
   if (tokenData.err) {
@@ -84,5 +85,11 @@ form.addEventListener("submit", async (e) => {
   window.location.assign(`https://the-stride.netlify.app/profile/`);
   
 });
+
+const dismiss = document.getElementById("dismiss");
+const cancel = document.querySelector(".fa-times");
+
+dismiss.addEventListener("click", helpers.closeGDPR);
+cancel.addEventListener("click", helpers.closeGDPR);
 
 location.hash = "login";

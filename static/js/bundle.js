@@ -38,12 +38,19 @@ function updateFormData() {
   const card = document.getElementById("login-signin");
   const confirmPasswordDiv = document.getElementById("row4");
 
+  let width = window.innerWidth;
+
   if (formHeading.textContent === "log in.") {
     location.hash = "signup";
     formHeading.textContent = "sign up.";
     submitButton.value = "sign up";
-    email.style.display = "block";
-    confirmPasswordDiv.style.display = "block";
+    if (width < "460") {
+      email.style.display = "inline";
+      confirmPasswordDiv.style.display = "inline";
+    } else {
+      email.style.display = "block";
+      confirmPasswordDiv.style.display = "block";
+    }
     card.style.height = "auto";
   } else {
     location.hash = "login";
@@ -51,17 +58,12 @@ function updateFormData() {
     submitButton.value = "log in";
     email.style.display = "none";
     confirmPasswordDiv.style.display = "none";
-    card.style.height = "350px";
+    card.style.height = "auto";
     document.getElementById("error-messages").textContent = "";
   }
 }
 
-const dismiss = document.getElementById("dismiss");
-const cancel = document.querySelector(".fa-times");
-const gdpr = document.querySelector("#gdpr");
 
-dismiss.addEventListener("click", closeGDPR);
-cancel.addEventListener("click", closeGDPR);
 
 function closeGDPR() {
   const gdpr = document.querySelector("#gdpr");
@@ -145,14 +147,13 @@ form.addEventListener("submit", async (e) => {
     options
   );
 
+  
   const tokenData = await response.json();
-
 
   if (tokenData.err) {
     document.getElementById("error-messages").textContent = "username or Email already in use.";
     return;
   }
-
 
   if (requestType === "#login") {
     const userData = jwt_decode(tokenData.token);
@@ -166,6 +167,12 @@ form.addEventListener("submit", async (e) => {
   window.location.assign(`https://the-stride.netlify.app/profile/`);
   
 });
+
+const dismiss = document.getElementById("dismiss");
+const cancel = document.querySelector(".fa-times");
+
+dismiss.addEventListener("click", helpers.closeGDPR);
+cancel.addEventListener("click", helpers.closeGDPR);
 
 location.hash = "login";
 

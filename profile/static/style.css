@@ -137,10 +137,22 @@ header button {
 
 /* ==== Habit containers ==== */
 
-#habits {
+#habits,
+#completedHabits {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+#activeHabitsHiddenTitle,
+#completedHabitsHiddenTitle {
+  display: none;
+  text-align: center;
+}
+
+h4 {
+  font-family: poppins, sans-serif;
+  font-weight: 600;
 }
 
 .habit-container {
@@ -287,7 +299,6 @@ input,
 
 #add-new-habit input[type="submit"],
 #add-new-reminder input[type="submit"] {
-
   width: 100%;
 
   border-radius: 35px;
@@ -569,4 +580,8 @@ button.remove::after {
   #badge-display {
     display: none;
   }
+}
+
+#reminderImage {
+  margin: 0 !important;
 }
